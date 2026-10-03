@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>STUDENT 360 — VUW International Companion · V15</title>
+<title>STUDENT 360 — VUW International Companion · V15.5</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -663,61 +663,87 @@ body{
 }
 
 
-/* V15.1 — Bottom navigation polish */
-.nav{
-  height:92px!important;
-  padding:8px 5px 9px!important;
-  grid-template-columns:repeat(6,minmax(0,1fr))!important;
-  align-items:center!important;
-  gap:0!important;
-  box-sizing:border-box!important;
-  border-top:1px solid #dce8e3!important;
-  box-shadow:0 -6px 20px rgba(13,76,56,.08)!important;
+/* V15.4 structural polish */
+.jobs-alumni-modal .alumni-tab,
+.jobs-alumni-modal [data-tab="alumni"],
+.jobs-alumni-modal .tab-alumni {
+    display:none!important;
 }
-.nav-item{
-  min-width:0!important;
-  width:100%!important;
-  height:72px!important;
-  padding:3px 0!important;
-  gap:5px!important;
-  justify-content:center!important;
-  font-size:10px!important;
-  line-height:1.15!important;
-  color:#64756f!important;
-}
-.nav-icon,.nav-item:not(.emergency) .nav-icon{
-  width:46px!important;
-  height:46px!important;
-  min-width:46px!important;
-  border-radius:14px!important;
-  font-size:20px!important;
-  transition:all .18s ease!important;
-  background:#f1f7f4!important;
-  color:#0d4c38!important;
-}
-.nav-icon i,.nav-item:not(.emergency) .nav-icon i{font-size:20px!important;}
-.nav-item.active .nav-icon{
-  background:#0d4c38!important;
-  color:#fff!important;
-  box-shadow:0 5px 12px rgba(13,76,56,.20)!important;
-}
-.nav-item.active{color:#0d4c38!important;font-weight:700!important;}
-.nav-item.emergency .nav-icon{
-  background:#fff4f2!important;
-  color:#c53b32!important;
-}
-.nav-item.emergency.active .nav-icon{
-  background:#0d4c38!important;
-  color:#fff!important;
-}
-.nav-item.emergency.active{color:#0d4c38!important;}
-@media (max-width:360px){
- .nav{padding-left:2px!important;padding-right:2px!important;}
- .nav-icon,.nav-item:not(.emergency) .nav-icon{width:42px!important;height:42px!important;min-width:42px!important;font-size:18px!important;}
- .nav-icon i,.nav-item:not(.emergency) .nav-icon i{font-size:18px!important;}
- .nav-item{font-size:9px!important;}
+.jobs-alumni-modal .jobs-tab,
+.jobs-alumni-modal [data-tab="jobs"],
+.jobs-alumni-modal .tab-jobs {
+    width:100%!important;
 }
 
+
+/* Emergency: classic red plus icon */
+.nav-item.emergency .nav-icon{
+    background:#fee2e2!important;
+    color:#dc2626!important;
+    border:2px solid #fecaca!important;
+}
+.nav-item.emergency .nav-icon i{
+    color:#dc2626!important;
+    font-size:21px!important;
+}
+.nav-item.emergency.active .nav-icon,
+.nav-item.emergency.selected .nav-icon{
+    background:#fee2e2!important;
+    color:#dc2626!important;
+}
+.nav-item.emergency.active .nav-icon i,
+.nav-item.emergency.selected .nav-icon i{
+    color:#dc2626!important;
+}
+
+/* Final V15.4 emergency override */
+.nav-item.emergency .nav-icon{background:#FEE2E2!important;color:#DC2626!important;border:2px solid #FECACA!important;}
+.nav-item.emergency .nav-icon i{color:#DC2626!important;}
+.nav-item.emergency.active .nav-icon,.nav-item.emergency.selected .nav-icon{background:#FEE2E2!important;color:#DC2626!important;}
+.nav-item.emergency.active .nav-icon i,.nav-item.emergency.selected .nav-icon i{color:#DC2626!important;}
+
+/* ================= V15.4 ARRIVAL CHECK-IN ================= */
+.flow-item.completed .flow-number{
+    background:#0D4C38!important;
+    border-color:#0D4C38!important;
+    color:#fff!important;
+    box-shadow:0 5px 14px rgba(13,76,56,.20);
+}
+.flow-item.completed .flow-number::after{
+    content:'✓';
+    font-size:17px;
+    font-weight:900;
+}
+.flow-item.completed .flow-number{font-size:0;}
+.flow-item.completed .flow-label{color:#0D4C38!important;}
+.flow-item.completed::after{
+    content:'Completed';
+    display:block;
+    margin-top:4px;
+    font-size:9px;
+    font-weight:800;
+    color:#0D4C38;
+    letter-spacing:.02em;
+}
+.arrival-complete-btn{
+    width:100%;
+    border:0;
+    border-radius:14px;
+    padding:13px 16px;
+    background:#0D4C38;
+    color:#fff;
+    font-size:13px;
+    font-weight:800;
+    cursor:pointer;
+    margin-top:18px;
+    box-shadow:0 6px 16px rgba(13,76,56,.16);
+}
+.arrival-complete-btn.completed{
+    background:#EAF3EF;
+    color:#0D4C38;
+    border:1px solid #BFDCD2;
+    box-shadow:none;
+}
 </style>
 <style>
 /* ================= V15 JOB SEARCH ================= */
@@ -886,6 +912,35 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
 /* Keep the single global modal close button as the only X in the modal. */
 .modal>.modal-close{z-index:20;}
 </style>
+
+<style>
+/* ================= V15.2 FINAL NAV + JOBS ALUMNI ================= */
+.nav{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:2px!important;padding:8px 5px 7px!important;}
+.nav-item{min-width:0!important;font-size:12px!important;font-weight:700!important;gap:5px!important;color:#64748B!important;}
+.nav-item .nav-icon{width:44px!important;height:44px!important;border-radius:13px!important;font-size:19px!important;transition:.18s ease!important;}
+.nav-item .nav-icon i{font-size:19px!important;}
+.nav-item.active,.nav-item.active span:last-child{color:#0D4C38!important;}
+.nav-item.active .nav-icon{background:#0D4C38!important;color:#fff!important;box-shadow:0 5px 12px rgba(13,76,56,.18)!important;}
+.nav-item.emergency .nav-icon{color:#0D4C38!important;}
+.nav-item.emergency.active .nav-icon{background:#0D4C38!important;color:#fff!important;}
+.nav-item.emergency.active{color:#0D4C38!important;}
+.nav-item:active .nav-icon{transform:scale(.96);}
+.ja-apply{background:#0D4C38!important;}
+.ja-footer-note{color:#647A72!important;}
+</style>
+
+<style>
+/* V15.7 Quick Needs — distinct, coordinated palette only */
+.quick-card:nth-child(1){background:#EAF6F4!important;border-color:#B9DDD8!important;}
+.quick-card:nth-child(1) .quick-icon{background:#CFEAE5!important;color:#147A72!important;}
+.quick-card:nth-child(2){background:#F1EEFA!important;border-color:#D8D0EC!important;}
+.quick-card:nth-child(2) .quick-icon{background:#DDD5F0!important;color:#66508F!important;}
+.quick-card:nth-child(3){background:#FBF4DE!important;border-color:#E9D9A7!important;}
+.quick-card:nth-child(3) .quick-icon{background:#F1E3B5!important;color:#9A7417!important;}
+.quick-card:nth-child(4){background:#FBEDEA!important;border-color:#E9C9C2!important;}
+.quick-card:nth-child(4) .quick-icon{background:#F2D6D0!important;color:#A95749!important;}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -1105,53 +1160,25 @@ A great place to study, live and belong.
 Quick needs
 </h2>
 <div class="quick-grid">
-<div class="quick-card bg-green-50"
-onclick="showScreen('arrival')">
-<div class="quick-icon bg-green-100 text-green-700">
-<i class="fa-solid fa-plane-arrival"></i>
+<div class="quick-card quick-card-arrival" onclick="showScreen('arrival')">
+<div class="quick-icon quick-icon-arrival"><i class="fa-solid fa-plane-arrival"></i></div>
+<div class="font-bold text-sm">Arrival</div>
+<div class="text-xs text-slate-500 mt-1">Get set up in NZ</div>
 </div>
-<div class="font-bold text-sm">
-Arrival
+<div class="quick-card quick-card-government" onclick="showScreen('government')">
+<div class="quick-icon quick-icon-government"><i class="fa-solid fa-building-columns"></i></div>
+<div class="font-bold text-sm">Government</div>
+<div class="text-xs text-slate-500 mt-1">Important admin</div>
 </div>
-<div class="text-xs text-slate-500 mt-1">
-Get set up in NZ
+<div class="quick-card quick-card-university" onclick="showScreen('university')">
+<div class="quick-icon quick-icon-university"><i class="fa-solid fa-graduation-cap"></i></div>
+<div class="font-bold text-sm">University</div>
+<div class="text-xs text-slate-500 mt-1">Study &amp; support</div>
 </div>
-</div>
-<div class="quick-card bg-blue-50"
-onclick="showScreen('government')">
-<div class="quick-icon bg-green-100 text-green-700">
-<i class="fa-solid fa-building-columns"></i>
-</div>
-<div class="font-bold text-sm">
-Government
-</div>
-<div class="text-xs text-slate-500 mt-1">
-Important admin
-</div>
-</div>
-<div class="quick-card bg-violet-50"
-onclick="showScreen('university')">
-<div class="quick-icon bg-green-100 text-green-700">
-<i class="fa-solid fa-graduation-cap"></i>
-</div>
-<div class="font-bold text-sm">
-University
-</div>
-<div class="text-xs text-slate-500 mt-1">
-Study & support
-</div>
-</div>
-<div class="quick-card bg-teal-50"
-onclick="showScreen('connect')">
-<div class="quick-icon bg-green-100 text-green-700">
-<i class="fa-solid fa-user-group"></i>
-</div>
-<div class="font-bold text-sm">
-Connect+
-</div>
-<div class="text-xs text-slate-500 mt-1">
-Life beyond study
-</div>
+<div class="quick-card quick-card-connect" onclick="showScreen('connect')">
+<div class="quick-icon quick-icon-connect"><i class="fa-solid fa-user-group"></i></div>
+<div class="font-bold text-sm">Connect+</div>
+<div class="text-xs text-slate-500 mt-1">Life beyond study</div>
 </div>
 </div>
 </div>
@@ -1191,7 +1218,7 @@ Your arrival flow
 A simple sequence to help you get settled.
 </p>
 <div class="flow">
-<div class="flow-item"
+<div class="flow-item" data-arrival-step="1"
 onclick="showAccommodation()">
 <div class="flow-number">
 01
@@ -1200,7 +1227,7 @@ onclick="showAccommodation()">
 Accommodation
 </div>
 </div>
-<div class="flow-item"
+<div class="flow-item" data-arrival-step="2"
 onclick="compareMobile()">
 <div class="flow-number">
 02
@@ -1209,7 +1236,7 @@ onclick="compareMobile()">
 SIM
 </div>
 </div>
-<div class="flow-item"
+<div class="flow-item" data-arrival-step="3"
 onclick="showSnapper()">
 <div class="flow-number">
 03
@@ -1218,7 +1245,7 @@ onclick="showSnapper()">
 Snapper
 </div>
 </div>
-<div class="flow-item"
+<div class="flow-item" data-arrival-step="4"
 onclick="showBank()">
 <div class="flow-number">
 04
@@ -1361,16 +1388,6 @@ onclick="openUniversityLink(this,'https://www.wgtn.ac.nz/library')">
 </div>
 <i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
 </div>
-
-<div class="info"
-onclick="openUniversityLink(this,'https://careerhub.vuw.ac.nz/')">
-<i class="fa-solid fa-briefcase"></i>
-<div>
-<h3>Career Hub</h3>
-<p>Find work opportunities</p>
-</div>
-<i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
-</div>
 <div class="info"
 onclick="openUniversityLink(this,'https://www.wgtn.ac.nz/events')">
 <i class="fa-solid fa-calendar-days"></i>
@@ -1383,8 +1400,8 @@ onclick="openUniversityLink(this,'https://www.wgtn.ac.nz/events')">
 <div class="info" onclick="openJobsAlumni(this)">
 <i class="fa-solid fa-people-group"></i>
 <div>
-<h3>Jobs &amp; Alumni</h3>
-<p>Find work and connect with VUW graduates</p>
+<h3>Jobs</h3>
+<p>Explore student-friendly job opportunities</p>
 </div>
 <i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
 </div>
@@ -1416,17 +1433,15 @@ onclick="showScreen('interests')">
 Set / Change Your Interests
 </button>
 </div>
-<div class="mt-5 space-y-3">
-<div class="info"
-onclick="showMeetStudents(this)">
-<i class="fa-solid fa-user-group"></i>
+<div class="mt-5 space-y-3"><div class="info"
+onclick="openAlumni(this)">
+<i class="fa-solid fa-user-tie"></i>
 <div>
-<h3>Meet Students</h3>
-<p>Find your people and build community.</p>
+<h3>Alumni</h3>
+<p>Learn from VUW alumni and mentors.</p>
 </div>
 <i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
-</div>
-<div class="info"
+</div><div class="info"
 onclick="guide('Shared Activities','Find cooking groups, games, outdoor activities and other experiences you can enjoy with other students.')">
 <i class="fa-solid fa-utensils"></i>
 <div>
@@ -1434,8 +1449,7 @@ onclick="guide('Shared Activities','Find cooking groups, games, outdoor activiti
 <p>Cooking · Games · Outdoors</p>
 </div>
 <i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
-</div>
-<div class="info"
+</div><div class="info"
 onclick="guide('What’s On','Discover student events, concerts, movies, sports and activities happening around Wellington.')">
 <i class="fa-solid fa-calendar-days"></i>
 <div>
@@ -1443,8 +1457,7 @@ onclick="guide('What’s On','Discover student events, concerts, movies, sports 
 <p>Events around Wellington</p>
 </div>
 <i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
-</div>
-<div class="info"
+</div><div class="info"
 onclick="guide('Do Something Together','Find someone to join you for a gym session, hike, board game or outdoor activity.')">
 <i class="fa-solid fa-person-hiking"></i>
 <div>
@@ -1452,13 +1465,12 @@ onclick="guide('Do Something Together','Find someone to join you for a gym sessi
 <p>Gym · Hiking · Board Games</p>
 </div>
 <i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
-</div>
-<div class="info"
-onclick="openJobsAlumni(this)">
-<i class="fa-solid fa-user-tie"></i>
+</div><div class="info"
+onclick="showMeetStudents(this)">
+<i class="fa-solid fa-user-group"></i>
 <div>
-<h3>Alumni & Mentors</h3>
-<p>Learn from those who have been there.</p>
+<h3>Meet Students</h3>
+<p>Find your people and build community.</p>
 </div>
 <i class="fa-solid fa-chevron-right ml-auto text-slate-400"></i>
 </div>
@@ -1841,7 +1853,12 @@ your longer-term place.
 </p>
 </div>
 </div>
+
+<button class="arrival-complete-btn" id="arrivalComplete1" onclick="markArrivalComplete(1)">
+<i class="fa-solid fa-circle-check mr-2"></i> Mark as complete
+</button>
 `);
+syncArrivalCompleteButton(1);
 }
 /* ================= SIM ================= */
 function compareMobile(element){
@@ -1879,7 +1896,12 @@ View 2degrees Options
 </button>
 </div>
 </div>
+
+<button class="arrival-complete-btn" id="arrivalComplete2" onclick="markArrivalComplete(2)">
+<i class="fa-solid fa-circle-check mr-2"></i> Mark as complete
+</button>
 `);
+syncArrivalCompleteButton(2);
 }
 /* ================= SNAPPER ================= */
 function showSnapper(element){
@@ -1922,7 +1944,12 @@ onclick="openLink('https://www.snapper.co.nz/buying-a-snapper-card/')">
 Buying a Snapper Card
 </button>
 </div>
+
+<button class="arrival-complete-btn" id="arrivalComplete3" onclick="markArrivalComplete(3)">
+<i class="fa-solid fa-circle-check mr-2"></i> Mark as complete
+</button>
 `);
+syncArrivalCompleteButton(3);
 }
 /* ================= BANK ================= */
 function showBank(element){
@@ -1990,7 +2017,12 @@ onclick="guide(
 View Bank Information
 </button>
 </div>
+
+<button class="arrival-complete-btn" id="arrivalComplete4" onclick="markArrivalComplete(4)">
+<i class="fa-solid fa-circle-check mr-2"></i> Mark as complete
+</button>
 `);
+syncArrivalCompleteButton(4);
 }
 /* ================= VISA ================= */
 function openVisa(element){
@@ -2419,6 +2451,47 @@ setTimeout(()=>{
 openInsurance();
 },700);
 }
+/* ================= V15.4 ARRIVAL CHECK-IN ================= */
+const ARRIVAL_STORAGE_KEY='student360_arrival_completed';
+function getArrivalCompleted(){
+    try{return JSON.parse(localStorage.getItem(ARRIVAL_STORAGE_KEY)||'[]');}
+    catch(e){return [];}
+}
+function updateArrivalProgress(){
+    const completed=getArrivalCompleted();
+    document.querySelectorAll('.flow-item[data-arrival-step]').forEach(item=>{
+        const step=Number(item.dataset.arrivalStep);
+        item.classList.toggle('completed',completed.includes(step));
+    });
+}
+function markArrivalComplete(step){
+    const completed=getArrivalCompleted();
+    if(!completed.includes(step)) completed.push(step);
+    completed.sort((a,b)=>a-b);
+    localStorage.setItem(ARRIVAL_STORAGE_KEY,JSON.stringify(completed));
+    updateArrivalProgress();
+    const btn=document.getElementById('arrivalComplete'+step);
+    if(btn){
+        btn.classList.add('completed');
+        btn.innerHTML='<i class="fa-solid fa-circle-check mr-2"></i> Completed';
+    }
+    showToast('Arrival step '+String(step).padStart(2,'0')+' completed.');
+}
+function resetArrivalProgress(){
+    localStorage.removeItem(ARRIVAL_STORAGE_KEY);
+    updateArrivalProgress();
+}
+function syncArrivalCompleteButton(step){
+    const btn=document.getElementById('arrivalComplete'+step);
+    if(!btn)return;
+    if(getArrivalCompleted().includes(step)){
+        btn.classList.add('completed');
+        btn.innerHTML='<i class="fa-solid fa-circle-check mr-2"></i> Completed';
+    }else{
+        btn.classList.remove('completed');
+        btn.innerHTML='<i class="fa-solid fa-circle-check mr-2"></i> Mark as complete';
+    }
+}
 /* ================= UNIVERSITY ================= */
 function openJobSearch(element){
 selectInfoCard(element);
@@ -2437,30 +2510,19 @@ const empty=document.getElementById('jobEmpty');if(empty)empty.style.display=vis
 
 
 function openJobsAlumni(element){
-selectInfoCard(element);
 openModal(`
 <div class="ja-wrap">
   <div class="ja-hero">
     <div class="ja-hero-icon"><i class="fa-solid fa-briefcase"></i></div>
     <div class="ja-hero-copy">
       <div class="ja-eyebrow">VUW CAREER CONNECTIONS</div>
-      <h2>Jobs &amp; Alumni</h2>
-      <p>Explore student-friendly opportunities and connect with VUW graduates.</p>
+      <h2>Jobs</h2>
+      <p>Explore student-friendly opportunities.</p>
     </div>
   </div>
-
-  <div class="ja-tabs" role="tablist">
-    <button class="ja-tab active" id="jaJobsTab" onclick="showJobsAlumniTab('jobs')" role="tab">
-      <i class="fa-solid fa-briefcase"></i><span>Jobs</span>
-    </button>
-    <button class="ja-tab" id="jaAlumniTab" onclick="showJobsAlumniTab('alumni')" role="tab">
-      <i class="fa-solid fa-user-group"></i><span>Alumni</span>
-    </button>
-  </div>
-
-  <div id="jaJobsPanel">
+<div id="jaJobsPanel">
     <div class="ja-section-head">
-      <div><h3>Opportunities for students</h3><p>Prototype examples — use VUW's official Job Search for current vacancies.</p></div>
+      <div><h3>Opportunities for students</h3><p>Explore prototype opportunities by type and location.</p></div>
     </div>
     <div class="ja-filter-row">
       <button class="ja-filter active" onclick="filterJAJobs(this,'all')">All</button>
@@ -2469,62 +2531,32 @@ openModal(`
       <button class="ja-filter" onclick="filterJAJobs(this,'internship')">Internships</button>
     </div>
     <div id="jaJobList">
-      <div class="ja-job" data-ja-type="on-campus">
-        <div class="ja-job-icon"><i class="fa-solid fa-book-open"></i></div>
-        <div class="ja-job-body"><div class="ja-job-top"><div><h4>Student Library Assistant</h4><div class="ja-muted">Rankin Brown Library · Kelburn Campus</div></div><div class="ja-price">NZ$23.15/hr</div></div>
-        <p class="ja-description">Support students with borrowing, shelving and everyday library services.</p>
-        <div class="ja-tags"><span class="ja-tag">On-Campus</span><span class="ja-tag">Max 15 hrs/week</span></div>
-        <button class="ja-apply" onclick="window.open('https://www.wgtn.ac.nz/careers/employment/jobs/job-search','_blank')">View official Job Search <i class="fa-solid fa-arrow-up-right-from-square"></i></button></div>
-      </div>
-      <div class="ja-job" data-ja-type="part-time">
-        <div class="ja-job-icon"><i class="fa-solid fa-mug-hot"></i></div>
-        <div class="ja-job-body"><div class="ja-job-top"><div><h4>Café Barista &amp; Customer Service</h4><div class="ja-muted">Courtenay Place · Wellington Central</div></div><div class="ja-price">NZ$24.50/hr</div></div>
-        <p class="ja-description">Weekend shifts and student-friendly hours in central Wellington.</p>
-        <div class="ja-tags"><span class="ja-tag">Part-Time</span><span class="ja-tag">12–18 hrs/week</span></div>
-        <button class="ja-apply" onclick="window.open('https://www.wgtn.ac.nz/careers/employment/jobs/job-search','_blank')">View official Job Search <i class="fa-solid fa-arrow-up-right-from-square"></i></button></div>
-      </div>
-      <div class="ja-job" data-ja-type="internship">
-        <div class="ja-job-icon"><i class="fa-solid fa-laptop-code"></i></div>
-        <div class="ja-job-body"><div class="ja-job-top"><div><h4>Junior Software Tester (Summer)</h4><div class="ja-muted">Technology company · Te Aro</div></div><div class="ja-price">NZ$27.00/hr</div></div>
-        <p class="ja-description">A summer opportunity for students interested in software testing and technology.</p>
-        <div class="ja-tags"><span class="ja-tag">Internship</span><span class="ja-tag">Summer</span></div>
-        <button class="ja-apply" onclick="window.open('https://www.wgtn.ac.nz/careers/employment/jobs/job-search','_blank')">View official Job Search <i class="fa-solid fa-arrow-up-right-from-square"></i></button></div>
-      </div>
+      <div class="ja-job" data-ja-type="on-campus"><div class="ja-job-icon"><i class="fa-solid fa-book-open"></i></div><div class="ja-job-body"><div class="ja-job-top"><div><h4>Student Library Assistant</h4><div class="ja-muted">Rankin Brown Library · Kelburn Campus</div></div><div class="ja-price">NZ$23.15/hr</div></div><p class="ja-description">Support students with borrowing, shelving and everyday library services.</p><div class="ja-tags"><span class="ja-tag">On-Campus</span><span class="ja-tag">Max 15 hrs/week</span></div><button class="ja-apply" onclick="showToast('Application flow opened for prototype testing.')">View Job Details <i class="fa-solid fa-arrow-right"></i></button></div></div>
+      <div class="ja-job" data-ja-type="part-time"><div class="ja-job-icon"><i class="fa-solid fa-mug-hot"></i></div><div class="ja-job-body"><div class="ja-job-top"><div><h4>Café Barista &amp; Customer Service</h4><div class="ja-muted">Courtenay Place · Wellington Central</div></div><div class="ja-price">NZ$24.50/hr</div></div><p class="ja-description">Weekend shifts and student-friendly hours in central Wellington.</p><div class="ja-tags"><span class="ja-tag">Part-Time</span><span class="ja-tag">12–18 hrs/week</span></div><button class="ja-apply" onclick="showToast('Application flow opened for prototype testing.')">View Job Details <i class="fa-solid fa-arrow-right"></i></button></div></div>
+      <div class="ja-job" data-ja-type="internship"><div class="ja-job-icon"><i class="fa-solid fa-laptop-code"></i></div><div class="ja-job-body"><div class="ja-job-top"><div><h4>Junior Software Tester (Summer)</h4><div class="ja-muted">Technology company · Te Aro</div></div><div class="ja-price">NZ$27.00/hr</div></div><p class="ja-description">A summer opportunity for students interested in software testing and technology.</p><div class="ja-tags"><span class="ja-tag">Internship</span><span class="ja-tag">Summer</span></div><button class="ja-apply" onclick="showToast('Application flow opened for prototype testing.')">View Job Details <i class="fa-solid fa-arrow-right"></i></button></div></div>
     </div>
   </div>
-
-  <div id="jaAlumniPanel" style="display:none;">
-    <div class="ja-section-head">
-      <div><h3>Learn from VUW graduates</h3><p>Connect with alumni for practical career guidance and local insights.</p></div>
-    </div>
-    <div class="ja-alum">
-      <div class="ja-alum-head"><div class="ja-avatar">AK</div><div><h4>Ananya Kapoor</h4><div class="ja-muted">Senior Business Analyst at Xero · VUW Commerce Alum</div></div></div>
-      <div class="ja-quote">Happy to help international students navigate corporate job hunting in New Zealand and review a CV.</div>
-      <button class="ja-action" onclick="showToast('Mentor request saved for prototype testing.')">Request Mentor Chat <i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-    <div class="ja-alum">
-      <div class="ja-alum-head"><div class="ja-avatar ja-avatar-teal">LT</div><div><h4>Li Wei Tan</h4><div class="ja-muted">Software Engineer at Wētā FX · VUW BSc Alum</div></div></div>
-      <div class="ja-quote">Reach out for advice on portfolio building and getting started in Wellington's technology sector.</div>
-      <button class="ja-action" onclick="showToast('Mentor request saved for prototype testing.')">Request Mentor Chat <i class="fa-solid fa-arrow-right"></i></button>
-    </div>
-    <div class="ja-note">Alumni profiles are prototype content for user testing, not verified live mentor listings.</div>
-  </div>
-
-  <div class="ja-footer-note"><i class="fa-solid fa-circle-info"></i><span>For current vacancies, applications and official career information, use VUW's official Job Search.</span></div>
+  <div class="ja-footer-note"><i class="fa-solid fa-circle-info"></i><span>Explore jobs directly in this prototype.</span></div>
 </div>`);
 }
 
-function showJobsAlumniTab(tab){
-const jobs=document.getElementById('jaJobsPanel');
-const alumni=document.getElementById('jaAlumniPanel');
-const jt=document.getElementById('jaJobsTab');
-const at=document.getElementById('jaAlumniTab');
-if(!jobs||!alumni||!jt||!at)return;
-const isJobs=tab==='jobs';
-jobs.style.display=isJobs?'block':'none';
-alumni.style.display=isJobs?'none':'block';
-jt.classList.toggle('active',isJobs);
-at.classList.toggle('active',!isJobs);
+function openAlumni(element){
+openModal(`
+<div class="ja-wrap">
+  <div class="ja-hero">
+    <div class="ja-hero-icon"><i class="fa-solid fa-user-group"></i></div>
+    <div class="ja-hero-copy">
+      <div class="ja-eyebrow">VUW COMMUNITY</div>
+      <h2>Alumni</h2>
+      <p>Connect with VUW alumni and mentors.</p>
+    </div>
+  </div>
+  <div class="ja-alumni-panel">
+    <div class="ja-alum"><div class="ja-alum-head"><div class="ja-avatar">AK</div><div><h4>Ananya Kapoor</h4><div class="ja-muted">Senior Business Analyst at Xero · VUW Commerce Alum</div></div></div><div class="ja-quote">Happy to help international students navigate corporate job hunting in New Zealand and review a CV.</div><button class="ja-action" onclick="showToast('Mentor request saved for prototype testing.')">Request Mentor Chat <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="ja-alum"><div class="ja-alum-head"><div class="ja-avatar ja-avatar-teal">LT</div><div><h4>Li Wei Tan</h4><div class="ja-muted">Software Engineer at Wētā FX · VUW BSc Alum</div></div></div><div class="ja-quote">Reach out for advice on portfolio building and getting started in Wellington's technology sector.</div><button class="ja-action" onclick="showToast('Mentor request saved for prototype testing.')">Request Mentor Chat <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="ja-note">Alumni profiles are prototype content for user testing, not verified live mentor listings.</div>
+  </div>
+</div>`);
 }
 
 function filterJAJobs(button,type){
@@ -2761,6 +2793,61 @@ document.getElementById(
 loadInterests();
 updatePersonalisation();
 });
+
+document.addEventListener('DOMContentLoaded',()=>{updateArrivalProgress();});
 </script>
+
+<style>
+/* ================= V15.5 HOME QUICK NEEDS ================= */
+.quick-grid{gap:13px;}
+.quick-card{
+    position:relative;
+    min-height:132px;
+    padding:16px 14px 14px;
+    border-radius:18px;
+    border:1px solid transparent;
+    box-shadow:0 5px 16px rgba(13,76,56,.045);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    overflow:hidden;
+}
+.quick-card::after{
+    content:'';
+    position:absolute;
+    right:-20px;
+    bottom:-24px;
+    width:78px;
+    height:78px;
+    border-radius:50%;
+    opacity:.32;
+}
+.quick-card:hover{
+    transform:translateY(-2px);
+    box-shadow:0 9px 22px rgba(13,76,56,.09);
+}
+.quick-icon{
+    width:46px;
+    height:46px;
+    margin-bottom:12px;
+    border-radius:14px;
+    font-size:19px;
+    box-shadow:0 4px 10px rgba(13,76,56,.08);
+    position:relative;
+    z-index:1;
+}
+.quick-card .font-bold,.quick-card .text-xs{position:relative;z-index:1;}
+.quick-card-arrival{background:#EAF4EF!important;border-color:#CFE3D9!important;}
+.quick-icon-arrival{background:#D4EADF!important;color:#0D4C38!important;}
+.quick-card-arrival::after{background:#B8D8CA;}
+.quick-card-government{background:#EEF6F5!important;border-color:#D2E5E2!important;}
+.quick-icon-government{background:#D8ECE9!important;color:#007D73!important;}
+.quick-card-government::after{background:#B9DCD7;}
+.quick-card-university{background:#F8F4E8!important;border-color:#E8DEC0!important;}
+.quick-icon-university{background:#F1E5BE!important;color:#725B13!important;}
+.quick-card-university::after{background:#E4CF8C;}
+.quick-card-connect{background:#EEF5F3!important;border-color:#D2E2DE!important;}
+.quick-icon-connect{background:#D8EAE5!important;color:#176B5A!important;}
+.quick-card-connect::after{background:#BBDAD2;}
+.quick-card .text-slate-500{color:#60736D!important;}
+</style>
 </body>
 </html>
